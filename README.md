@@ -1,5 +1,6 @@
 # Advent of Code – Rust Solutions
 
+![Build status](https://github.com/mmacz/aoc/actions/workflows/aoc2025.yml/badge.svg)
 ![Build status](https://github.com/mmacz/aoc/actions/workflows/aoc2024.yml/badge.svg)
 \
 ![Build status](https://github.com/mmacz/aoc/actions/workflows/aoc2019.yml/badge.svg)
