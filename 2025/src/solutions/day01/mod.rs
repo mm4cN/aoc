@@ -10,7 +10,7 @@ impl Solver for Problem {
     }
 
     fn solution2(&self, input: &str) -> Self::Ans2 {
-        0
+        count_zero_crossings(input)
     }
 }
 
@@ -50,6 +50,22 @@ fn count_zero_points(input: &str) -> u64 {
         .count() as u64
 }
 
+fn count_zero_crossings(input: &str) -> u64 {
+    let rotations = read_rotations(input);
+    let mut count: u64 = 0;
+    let mut curr = 50;
+    for rotation in &rotations {
+        for _ in 0..rotation.times {
+            curr += rotation.dir;
+            curr %= 100;
+            if curr == 0 {
+                count += 1;
+            }
+        }
+    }
+    count
+}
+
 #[cfg(test)]
 mod tests {
     use crate::solutions::day01::*;
@@ -59,6 +75,13 @@ mod tests {
         let problem = Problem{};
         let ans = problem.solution1(TEST_INPUT_1);
         assert_eq!(ans, 3);
+    }
+
+    #[test]
+    fn test_solution2() {
+        let problem = Problem{};
+        let ans = problem.solution2(TEST_INPUT_1);
+        assert_eq!(ans, 6);
     }
 
     const TEST_INPUT_1: &str = "L68
