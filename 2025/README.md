@@ -2,11 +2,11 @@
 
 # Advent of Code 2025
 
-This repository gathers solutions for the AOC 2024. All of the solutions are developed in Rust.
+This repository gathers solutions for the AOC 2025. All of the solutions are developed in Rust.
 
 | Day | Stars |
 | :---: | :---: |
-| 1  |   |
+| 1  | ⭐ |
 | 2  |   |
 | 3  |   |
 | 4  |   |
@@ -15,21 +15,21 @@ This repository gathers solutions for the AOC 2024. All of the solutions are dev
 | 7  |   |
 | 8  |   |
 | 9  |   |
-| 10 |       |
-| 11 |       |
-| 12 |       |
-| 13 |       |
-| 14 |       |
-| 15 |       |
-| 16 |       |
-| 17 |       |
-| 18 |       |
-| 19 |       |
-| 20 |       |
-| 21 |       |
-| 22 |       |
-| 23 |       |
-| 24 |       |
-| 25 |       |
+| 10 |   |
+| 11 |   |
+| 12 |   |
+| 13 |   |
+| 14 |   |
+| 15 |   |
+| 16 |   |
+| 17 |   |
+| 18 |   |
+| 19 |   |
+| 20 |   |
+| 21 |   |
+| 22 |   |
+| 23 |   |
+| 24 |   |
+| 25 |   |
 
 

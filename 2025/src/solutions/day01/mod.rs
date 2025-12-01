@@ -2,11 +2,11 @@ use crate::solver::Solver;
 pub struct Problem;
 
 impl Solver for Problem {
-    type Ans1 = i64;
-    type Ans2 = i64;
+    type Ans1 = u64;
+    type Ans2 = u64;
 
     fn solution1(&self, input: &str) -> Self::Ans1 {
-        0
+        count_zero_points(input)
     }
 
     fn solution2(&self, input: &str) -> Self::Ans2 {
@@ -14,9 +14,52 @@ impl Solver for Problem {
     }
 }
 
+struct Rotation {
+    dir: i32,
+    times: u32,
+}
+type Rotations = Vec<Rotation>;
+
+fn read_rotations(input: &str) -> Rotations {
+    input
+        .lines()
+        .map(|line| {
+            let (dir, times) = line.split_at(1);
+            let dir_value = match dir {
+                "L" => -1,
+                "R" => 1,
+                _ => panic!("Unknown direction: {}", dir),
+            };
+            Rotation {
+                dir: dir_value,
+                times: times.parse::<u32>().unwrap(),
+            }
+        })
+        .collect()
+}
+
+fn count_zero_points(input: &str) -> u64 {
+    let rotations = read_rotations(input);
+    rotations.iter()
+        .scan(50, |curr, rotation| {
+            *curr += rotation.dir * (rotation.times as i32);
+            *curr %= 100;
+            Some(*curr == 0)
+        })
+        .filter(|&is_zero| is_zero)
+        .count() as u64
+}
+
 #[cfg(test)]
 mod tests {
     use crate::solutions::day01::*;
+
+    #[test]
+    fn test_solution1() {
+        let problem = Problem{};
+        let ans = problem.solution1(TEST_INPUT_1);
+        assert_eq!(ans, 3);
+    }
 
     const TEST_INPUT_1: &str = "L68
 L30
