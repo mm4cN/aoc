@@ -52,9 +52,7 @@ fn count_zero_points(input: &str) -> u64 {
 
 fn count_zero_crossings(input: &str) -> u64 {
     let rotations = read_rotations(input);
-    let mut count: u64 = 0;
-    let mut curr = 50;
-    for rotation in &rotations {
+    let (_, count) = rotations.iter().fold((50, 0u64), |(mut curr, mut count), rotation| {
         for _ in 0..rotation.times {
             curr += rotation.dir;
             curr %= 100;
@@ -62,7 +60,8 @@ fn count_zero_crossings(input: &str) -> u64 {
                 count += 1;
             }
         }
-    }
+        (curr, count)
+    });
     count
 }
 
