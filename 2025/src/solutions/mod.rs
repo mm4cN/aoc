@@ -6,6 +6,7 @@ use std::path::Path;
 use regex::Regex;
 
 mod day01;
+mod day02;
 
 fn read_file_to_string(filename: &str) -> io::Result<String> {
     let mut file = File::open(filename)?;
@@ -39,6 +40,7 @@ pub fn run_solutions() {
 
     match day {
         1 => day01::Problem{}.solve(1, &input),
+        2 => day02::Problem{}.solve(2, &input),
         _ => todo!()
     }
 
