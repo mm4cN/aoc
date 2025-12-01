@@ -1,0 +1,35 @@
+![Build status](https://github.com/mmacz/aoc/actions/workflows/aoc2025.yml/badge.svg)
+
+# Advent of Code 2025
+
+This repository gathers solutions for the AOC 2024. All of the solutions are developed in Rust.
+
+| Day | Stars |
+| :---: | :---: |
+| 1  |   |
+| 2  |   |
+| 3  |   |
+| 4  |   |
+| 5  |   |
+| 6  |   |
+| 7  |   |
+| 8  |   |
+| 9  |   |
+| 10 |       |
+| 11 |       |
+| 12 |       |
+| 13 |       |
+| 14 |       |
+| 15 |       |
+| 16 |       |
+| 17 |       |
+| 18 |       |
+| 19 |       |
+| 20 |       |
+| 21 |       |
+| 22 |       |
+| 23 |       |
+| 24 |       |
+| 25 |       |
+
+
