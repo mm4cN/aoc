@@ -12,6 +12,7 @@ This repository contains my solutions for the [Advent of Code](https://adventofc
 Each year is organized into its own directory. For example:
 - `2019/`
 - `2024/`
+- `2025/`
 - etc.
 
 Within each year, you'll find one directory per day, typically named `dayXX`, containing the source code and input files for that day's puzzle. Inputs are not provided because of legal reasons.
