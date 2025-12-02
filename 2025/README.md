@@ -7,7 +7,7 @@ This repository gathers solutions for the AOC 2025. All of the solutions are dev
 | Day | Stars |
 | :---: | :---: |
 | 1  | ⭐⭐ |
-| 2  |   |
+| 2  | ⭐  |
 | 3  |   |
 | 4  |   |
 | 5  |   |
