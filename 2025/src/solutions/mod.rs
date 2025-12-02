@@ -7,6 +7,7 @@ use regex::Regex;
 
 mod day01;
 mod day02;
+mod day03;
 
 fn read_file_to_string(filename: &str) -> io::Result<String> {
     let mut file = File::open(filename)?;
@@ -27,20 +28,19 @@ pub fn run_solutions() {
         std::process::exit(1);
     }
     let filename = Path::new(filepath).file_name().unwrap().to_str().unwrap();
-    let mut day: usize = 1;
+    let mut day: u32 = 1;
     let re = Regex::new(r"input(\d+)\.txt").unwrap();
     if let Some(captures) = re.captures(filename) {
         if let Some(x_str) = captures.get(1) {
-            let x: usize = x_str.as_str().parse().unwrap();
+            let x: u32 = x_str.as_str().parse().unwrap();
             day = x;
         }
     }
-
     let input = read_file_to_string(filepath).unwrap();
-
     match day {
-        1 => day01::Problem{}.solve(1, &input),
-        2 => day02::Problem{}.solve(2, &input),
+        1 => day01::Problem{}.solve(day, &input),
+        2 => day02::Problem{}.solve(day, &input),
+        3 => day03::Problem{}.solve(day, &input),
         _ => todo!()
     }
 
