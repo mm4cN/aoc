@@ -18,8 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Install nightly toolchain
+      run: rustup toolchain install nightly
     - name: Build
       run: cargo build --release --bin aoc2025
     - name: Run tests
-      run: cargo test --release --bin aoc2025
+      run: cargo +nightly test --bin aoc2025 -- -Z unstable-options --report-time
 
