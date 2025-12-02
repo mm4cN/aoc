@@ -16,25 +16,56 @@ impl Solver for Problem {
                 (start, end)
             })
             .flat_map(|(start, end)| start..=end)
-            .filter(|&id| id_invalid(id, 2))
+            .filter(|&id| repeats_two_times(id))
             .sum()
     }
 
-    fn solution2(&self, _input: &str) -> Self::Ans2 {
-        0
+    fn solution2(&self, input: &str) -> Self::Ans2 {
+        input
+            .trim()
+            .split(',')
+            .map(|part| {
+                let mut bounds = part.split('-').map(|x| x.parse::<u64>().unwrap());
+                let start = bounds.next().unwrap();
+                let end = bounds.next().unwrap();
+                (start, end)
+            })
+            .flat_map(|(start, end)| start..=end)
+            .filter(|&id| repeats_at_least_two_times(id))
+            .sum()
     }
 }
 
-fn id_invalid(id: u64, repetition: usize) -> bool {
-    let mut id_len = id.to_string().len() >> 1;
-    if id_len == 0 {
-        id_len = 1;
-    }
+fn repeats_two_times(id: u64) -> bool {
+    let id_len = match id.to_string().len() >> 1 {
+        0 => 1,
+        n => n,
+    };
     let str_id = id.to_string()[..id_len].to_string();
-    match str_id.repeat(repetition).parse::<u64>() {
+    match str_id.repeat(2).parse::<u64>() {
         Ok(doubled_id) => doubled_id == id,
-        Err(_) => true,
+        Err(_) => false,
     }
+}
+
+fn repeats_at_least_two_times(id: u64) -> bool {
+    let s = id.to_string();
+    let len = s.len();
+
+    for seq_len in 1..=(len / 2) {
+        if len % seq_len != 0 {
+            continue;
+        }
+        let reps = len / seq_len;
+        if reps < 2 {
+            continue;
+        }
+        let pattern = &s[..seq_len];
+        if pattern.repeat(reps) == s {
+            return true;
+        }
+    }
+    false
 }
 
 #[cfg(test)]
@@ -52,7 +83,7 @@ mod tests {
     fn test_solution2() {
         let problem = Problem {};
         let ans = problem.solution2(TEST_INPUT_1);
-        assert_eq!(ans, 0);
+        assert_eq!(ans, 4174379265);
     }
 
     const TEST_INPUT_1: &str = "\
