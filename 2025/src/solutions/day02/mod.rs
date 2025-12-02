@@ -16,7 +16,7 @@ impl Solver for Problem {
                 (start, end)
             })
             .flat_map(|(start, end)| start..=end)
-            .filter(|&id| repeats_two_times(id))
+            .filter(|&id| repeats(id, true))
             .sum()
     }
 
@@ -31,41 +31,27 @@ impl Solver for Problem {
                 (start, end)
             })
             .flat_map(|(start, end)| start..=end)
-            .filter(|&id| repeats_at_least_two_times(id))
+            .filter(|&id| repeats(id, false))
             .sum()
     }
 }
 
-fn repeats_two_times(id: u64) -> bool {
-    let id_len = match id.to_string().len() >> 1 {
-        0 => 1,
-        n => n,
-    };
-    let str_id = id.to_string()[..id_len].to_string();
-    match str_id.repeat(2).parse::<u64>() {
-        Ok(doubled_id) => doubled_id == id,
-        Err(_) => false,
-    }
-}
-
-fn repeats_at_least_two_times(id: u64) -> bool {
+fn repeats(id: u64, exact: bool) -> bool {
     let s = id.to_string();
     let len = s.len();
+    let s_bytes = s.as_bytes();
 
-    for seq_len in 1..=(len / 2) {
-        if len % seq_len != 0 {
-            continue;
+    (1..=(len / 2)).any(|seq_len| {
+        len % seq_len == 0 &&
+        {
+            let reps = len / seq_len;
+            (!exact && reps >= 2 || exact && reps == 2) &&
+            {
+                let pattern = &s_bytes[..seq_len];
+                s_bytes.chunks(seq_len).all(|chunk| chunk == pattern)
+            }
         }
-        let reps = len / seq_len;
-        if reps < 2 {
-            continue;
-        }
-        let pattern = &s[..seq_len];
-        if pattern.repeat(reps) == s {
-            return true;
-        }
-    }
-    false
+    })
 }
 
 #[cfg(test)]
