@@ -40,8 +40,8 @@ impl Solver for Problem {
             .count() as u64
     }
 
-    fn solution2(&self, _input: &str) -> Self::Ans2 {
-        let grid: Grid = parse_input(_input);
+    fn solution2(&self, input: &str) -> Self::Ans2 {
+        let grid: Grid = parse_input(input);
         let mut new_grid = grid.clone();
 
         let height = grid.len();
