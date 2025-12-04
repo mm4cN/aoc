@@ -6,18 +6,22 @@ impl Solver for Problem {
     type Ans2 = u64;
 
     fn solution1(&self, input: &str) -> Self::Ans1 {
-        input.lines().map(|line| biggest_k_in_sequence(line, 2)).sum()
+        input
+            .lines()
+            .map(|line| biggest_k_in_sequence(line, 2))
+            .sum()
     }
 
     fn solution2(&self, input: &str) -> Self::Ans2 {
-        input.lines().map(|line| biggest_k_in_sequence(line, 12)).sum()
+        input
+            .lines()
+            .map(|line| biggest_k_in_sequence(line, 12))
+            .sum()
     }
 }
 
 fn biggest_k_in_sequence(seq: &str, k: usize) -> u64 {
-    let digits: Vec<u8> = seq.chars()
-        .map(|c| c.to_digit(10).unwrap() as u8)
-        .collect();
+    let digits: Vec<u8> = seq.chars().map(|c| c.to_digit(10).unwrap() as u8).collect();
 
     let mut stack: Vec<u8> = Vec::with_capacity(k);
     let mut to_remove = digits.len().saturating_sub(k);

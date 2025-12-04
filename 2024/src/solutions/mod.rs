@@ -1,9 +1,9 @@
 use crate::solver::Solver;
-use std::io::{self, Read};
-use std::env;
-use std::fs::{File, metadata};
-use std::path::Path;
 use regex::Regex;
+use std::env;
+use std::fs::{metadata, File};
+use std::io::{self, Read};
+use std::path::Path;
 
 mod day01;
 mod day02;
@@ -46,16 +46,15 @@ pub fn run_solutions() {
     let input = read_file_to_string(filepath).unwrap();
 
     match day {
-        1 => day01::Problem{}.solve(1, &input),
-        2 => day02::Problem{}.solve(2, &input),
-        3 => day03::Problem{}.solve(3, &input),
-        4 => day04::Problem{}.solve(4, &input),
-        5 => day05::Problem{}.solve(5, &input),
-        6 => day06::Problem{}.solve(6, &input),
-        7 => day07::Problem{}.solve(7, &input),
-        8 => day08::Problem{}.solve(8, &input),
-        9 => day09::Problem{}.solve(9, &input),
-        _ => todo!()
+        1 => day01::Problem {}.solve(1, &input),
+        2 => day02::Problem {}.solve(2, &input),
+        3 => day03::Problem {}.solve(3, &input),
+        4 => day04::Problem {}.solve(4, &input),
+        5 => day05::Problem {}.solve(5, &input),
+        6 => day06::Problem {}.solve(6, &input),
+        7 => day07::Problem {}.solve(7, &input),
+        8 => day08::Problem {}.solve(8, &input),
+        9 => day09::Problem {}.solve(9, &input),
+        _ => todo!(),
     }
-
 }

@@ -22,7 +22,7 @@ impl Solver for Problem {
 
         for y in 0..height {
             for x in 0..width {
-                if new_grid[y][x] == Field::Empty {
+                if new_grid[y][x] != Field::PaperRoll {
                     continue;
                 }
                 if let Some(n) = count_adjacent_paper_rolls(&grid, x, y) {
@@ -39,9 +39,48 @@ impl Solver for Problem {
             .filter(|&&f| f == Field::Forklift)
             .count() as u64
     }
+
     fn solution2(&self, _input: &str) -> Self::Ans2 {
-        0
+        let grid: Grid = parse_input(_input);
+        let mut new_grid = grid.clone();
+
+        let height = grid.len();
+        let width = if height > 0 { grid[0].len() } else { 0 };
+
+        let mut total_removed: u64 = 0;
+        loop {
+            for y in 0..height {
+                for x in 0..width {
+                    if new_grid[y][x] != Field::PaperRoll {
+                        continue;
+                    }
+                    if let Some(n) = count_adjacent_paper_rolls(&new_grid, x, y) {
+                        if (0..4).contains(&n) {
+                            new_grid[y][x] = Field::Forklift;
+                        }
+                    }
+                }
+            }
+            match remove_forklifts(&mut new_grid) {
+                0 => break,
+                removed => total_removed += removed,
+            }
+        }
+        total_removed
     }
+}
+
+fn remove_forklifts(grid: &mut Grid) -> u64 {
+    let mut count: u64 = 0;
+    for row in grid.iter_mut() {
+        for field in row.iter_mut() {
+            if *field == Field::Forklift {
+                *field = Field::Empty;
+                count += 1;
+            }
+        }
+    }
+    count
 }
 
 fn parse_input(input: &str) -> Grid {
@@ -116,7 +155,7 @@ mod tests {
     fn test_solution2() {
         let problem = Problem {};
         let ans = problem.solution2(TEST_INPUT_1);
-        assert_eq!(ans, 0);
+        assert_eq!(ans, 43);
     }
 
     const TEST_INPUT_1: &str = "..@@.@@@@.

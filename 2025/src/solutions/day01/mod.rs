@@ -40,7 +40,8 @@ fn read_rotations(input: &str) -> Rotations {
 
 fn count_zero_points(input: &str) -> u64 {
     let rotations = read_rotations(input);
-    rotations.iter()
+    rotations
+        .iter()
         .scan(50, |curr, rotation| {
             *curr += rotation.dir * (rotation.times as i32);
             *curr %= 100;
@@ -52,16 +53,18 @@ fn count_zero_points(input: &str) -> u64 {
 
 fn count_zero_crossings(input: &str) -> u64 {
     let rotations = read_rotations(input);
-    let (_, count) = rotations.iter().fold((50, 0u64), |(mut curr, mut count), rotation| {
-        for _ in 0..rotation.times {
-            curr += rotation.dir;
-            curr %= 100;
-            if curr == 0 {
-                count += 1;
+    let (_, count) = rotations
+        .iter()
+        .fold((50, 0u64), |(mut curr, mut count), rotation| {
+            for _ in 0..rotation.times {
+                curr += rotation.dir;
+                curr %= 100;
+                if curr == 0 {
+                    count += 1;
+                }
             }
-        }
-        (curr, count)
-    });
+            (curr, count)
+        });
     count
 }
 
@@ -71,14 +74,14 @@ mod tests {
 
     #[test]
     fn test_solution1() {
-        let problem = Problem{};
+        let problem = Problem {};
         let ans = problem.solution1(TEST_INPUT_1);
         assert_eq!(ans, 3);
     }
 
     #[test]
     fn test_solution2() {
-        let problem = Problem{};
+        let problem = Problem {};
         let ans = problem.solution2(TEST_INPUT_1);
         assert_eq!(ans, 6);
     }

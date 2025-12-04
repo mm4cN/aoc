@@ -42,11 +42,9 @@ fn repeats(id: u64, exact: bool) -> bool {
     let s_bytes = s.as_bytes();
 
     (1..=(len / 2)).any(|seq_len| {
-        len % seq_len == 0 &&
-        {
+        len % seq_len == 0 && {
             let reps = len / seq_len;
-            (!exact && reps >= 2 || exact && reps == 2) &&
-            {
+            (!exact && reps >= 2 || exact && reps == 2) && {
                 let pattern = &s_bytes[..seq_len];
                 s_bytes.chunks(seq_len).all(|chunk| chunk == pattern)
             }
