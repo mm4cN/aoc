@@ -13,7 +13,26 @@ impl Solver for Problem {
     }
 
     fn solution2(&self, _input: &str) -> Self::Ans2 {
-        0
+        let (mut ranges, _) = parse_input(_input);
+        ranges.sort_by_key(|&(start, _)| start);
+
+        let mut merged: Vec<(u64, u64)> = Vec::new();
+        for &(start, end) in &ranges {
+            if let Some(&mut (ref mut _m_start, ref mut m_end)) = merged.last_mut() {
+                if start <= *m_end + 1 {
+                    *m_end = (*m_end).max(end);
+                } else {
+                    merged.push((start, end));
+                }
+            } else {
+                merged.push((start, end));
+            }
+        }
+
+        merged
+            .iter()
+            .map(|&(start, end)| end - start + 1)
+            .sum::<u64>()
     }
 }
 
@@ -58,7 +77,7 @@ mod tests {
     fn test_solution2() {
         let problem = Problem {};
         let ans = problem.solution2(TEST_INPUT_1);
-        assert_eq!(ans, 0);
+        assert_eq!(ans, 14);
     }
 
     const TEST_INPUT_1: &str = "3-5
