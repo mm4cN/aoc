@@ -10,6 +10,7 @@ mod day02;
 mod day03;
 mod day04;
 mod day05;
+mod day06;
 
 fn read_file_to_string(filename: &str) -> io::Result<String> {
     let mut file = File::open(filename)?;
@@ -45,6 +46,7 @@ pub fn run_solutions() {
         3 => day03::Problem {}.solve(day, &input),
         4 => day04::Problem {}.solve(day, &input),
         5 => day05::Problem {}.solve(day, &input),
+        6 => day06::Problem {}.solve(day, &input),
         _ => todo!(),
     }
 }
